@@ -1,0 +1,50 @@
+---
+
+- name: Prerequisites - installing java, fixing packages, adding apg key and repo
+  hosts: all
+  become: true
+  roles:
+    - role: prerequisites
+  tags: role-prerequisites
+
+- name: Deploy Elasticsearch
+  hosts: elasticsearch
+  become: yes
+  roles:
+    - role: elasticsearch
+  tags: role-elastic
+
+- name: Deploy Kibana
+  hosts: kibana
+  become: yes
+  roles:
+    - role: kibana
+  tags: role-kibana
+
+- name: Install Nginx on Kibana node
+  hosts: kibana
+  become: yes
+  roles:
+    - role: nginx
+  tags: role-nginx
+
+- name: Deploy Logstash
+  hosts: logstash
+  become: yes
+  roles:
+    - role: logstash
+  tags: role-logstash
+
+#- name: Generated SSL Certs
+#  hosts: logstash
+#  become: yes
+#  roles:
+#    - role: SSL-Certs
+#  tags: role-SSL-Certs
+
+- name: Install Filebeat to Logstash host
+  hosts: logstash
+  become: yes
+  roles:
+    - role: filebeat
+  tags: role-filebeat

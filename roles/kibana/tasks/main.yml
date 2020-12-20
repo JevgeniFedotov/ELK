@@ -1,0 +1,30 @@
+---
+
+- name: Install Kibana
+  apt:
+   name: kibana
+   state: present
+   update_cache: yes
+
+- name: Defining server.host
+  lineinfile:
+   destfile: /etc/kibana/kibana.yml
+   regexp: 'server.host:'
+   line: 'server.host: {{ Kibana01 }}'
+
+- name: Defining server.port
+  lineinfile:
+   destfile: /etc/kibana/kibana.yml
+   regexp: 'server.port:'
+   line: 'server.port: {{ Kibana_port }}'
+
+- name: Defining elasticsearch.hosts
+  lineinfile:
+   destfile: /etc/kibana/kibana.yml
+   regexp: 'elasticsearch.hosts:'
+   line: 'elasticsearch.hosts: "http://{{ Elastic01 }}:9200"'
+
+- name: Starting Kibana
+  service:
+   name: kibana
+   state: restarted

@@ -1,0 +1,41 @@
+---
+
+- name: Install Elasticsearch
+  apt:
+   name: elasticsearch
+   state: present
+
+- name: Defining node.name
+  lineinfile:
+   destfile: /etc/elasticsearch/elasticsearch.yml
+   regexp: 'node.name:'
+   line: 'node.name: {{ ansible_hostname }}'
+
+- name: Defining network.host
+  lineinfile:
+   destfile: /etc/elasticsearch/elasticsearch.yml
+   regexp: 'network.host:'
+   line: 'network.host: {{ inventory_hostname }}'
+
+- name: Defining http.port
+  lineinfile:
+   destfile: /etc/elasticsearch/elasticsearch.yml
+   regexp: 'http.port:'
+   line: 'http.port: {{ Elastic_port }}'
+
+- name: Defining discovery.seed_hosts
+  lineinfile:
+   destfile: /etc/elasticsearch/elasticsearch.yml
+   regexp: 'discovery.seed_hosts:'
+   line: 'discovery.seed_hosts: [ "{{ Elastic01 }}", "{{ Elastic02 }}", "{{ Elastic03 }}" ]'
+
+- name: Defining cluster.initial_master_nodes
+  lineinfile:
+   destfile: /etc/elasticsearch/elasticsearch.yml
+   regexp: 'cluster.initial_master_nodes:'
+   line: 'cluster.initial_master_nodes: ["{{ Elastic01 }}"]'
+
+- name: Starting Elasticsearch
+  service:
+   name: elasticsearch
+   state: restarted

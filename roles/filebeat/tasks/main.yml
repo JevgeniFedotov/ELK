@@ -1,0 +1,23 @@
+---
+
+- name: Install Filebeat
+  apt:
+    name: filebeat
+    state: present
+    update_cache: yes
+
+- name: Updating Filebeat conf
+  template:
+    src: filebeat.yml.j2
+    dest: /etc/filebeat/filebeat.yml
+
+- name: Enabling Filebeat systen module
+  shell: filebeat modules enable system
+
+- name: Load the Index template
+  shell: sudo filebeat setup --index-management -E output.logstash.enabled=false -E 'output.elasticsearch.hosts=["{{ Elastic01 }}:{{ Elastic_port }}","{{ Elastic02 }}:{{ Elastic_port }}","{{ Elastic03 }}:{{ Elastic_port }}"]'
+
+- name: Starting Filebeat
+  service:
+   name: filebeat
+   state: restarted

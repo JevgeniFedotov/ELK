@@ -1,0 +1,11 @@
+---
+Elastic01: 142.93.111.112
+Elastic02: 134.209.255.111
+Elastic03: 167.99.255.126
+Elastic_port: 9200
+Kibana01: 167.99.133.251
+Kibana_port: 5601
+kibana_user: admin
+kibana_password: admin
+Logstash01: 134.209.238.179
+logstash_port: 5042
