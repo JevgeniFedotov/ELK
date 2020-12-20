@@ -35,13 +35,6 @@
     - role: logstash
   tags: role-logstash
 
-#- name: Generated SSL Certs
-#  hosts: logstash
-#  become: yes
-#  roles:
-#    - role: SSL-Certs
-#  tags: role-SSL-Certs
-
 - name: Install Filebeat to Logstash host
   hosts: logstash
   become: yes
