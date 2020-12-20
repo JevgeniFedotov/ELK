@@ -14,15 +14,14 @@
   template:
     src: kibana.nginx.conf.j2
     dest: /etc/nginx/sites-available/Kibanatest123.com
-    owner: root
-    group: root
-    mode: '0766'
 
-- name: Create symlink for sites-available
+- name: Create symlink for Kibana site conf
   file:
     src: /etc/nginx/sites-available/Kibanatest123.com
     dest: /etc/nginx/sites-enabled/Kibanatest123.com
     state: link
+    mode: 0766
+    force: yes
 
 # Creating admin user for Kibana
 # Install Pexpect to handle promts of the terminal
