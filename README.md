@@ -4,10 +4,10 @@ This playbook will install ELK stack (Elasticsearch, Kibana, Logstash, Filebeat)
 1. 5 Ubuntu VM's (20.04 LTS), 3 for Elasticsearch, 1 for Kibana, 1 for Logstash/Filebeat.
 2. Installed ansible on local machine in order to run playbook.
 3. Network rules:
-* 3.1 Elasticsearch - port 9200 has to be open for communication between Elastic nodes and in order for Kibana and Logstash to reach Elastic nodes via this port. *
-* 3.2 Kibana - port 80 has to be open, Nginx webserver is listening on that port. 443 is for SSL, but this playbook doesn't cover SSL. *
-* 3.3 Kibana - port 5601 has to be open, which is Kibana server port. *
-* 3.4 logstash - port 5042 should be open as Logstash is listening on that port. *
+* 3.1 Elasticsearch - port 9200 has to be open for communication between Elastic nodes and in order for Kibana and Logstash to reach Elastic nodes via this port.
+* 3.2 Kibana - port 80 has to be open, Nginx webserver is listening on that port. 443 is for SSL, but this playbook doesn't cover SSL.
+* 3.3 Kibana - port 5601 has to be open, which is Kibana server port.
+* 3.4 logstash - port 5042 should be open as Logstash is listening on that port.
 # Instructions
 1. Clone this repo to your local machine:
 ```
