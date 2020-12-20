@@ -1,29 +1,30 @@
 ---
 
-- name: install Nginx on Kibana node
+- name: Install Nginx on Kibana node
   apt:
-    name: ['nginx']
-    state: latest
+    name: nginx
+    state: present
 
-- name: delete default nginx site
+- name: Delete default Nginx site conf
   file:
     path: /etc/nginx/sites-enabled/default
     state: absent
 
-- name: Add Kibana nginx site conf
+- name: Add Kibana Nginx site conf
   template:
     src: kibana.nginx.conf.j2
-    dest: /etc/nginx/sites-enabled/Kibanatest123.com
+    dest: /etc/nginx/sites-available/Kibanatest123.com
     owner: root
     group: root
-    mode: '0644'
+    mode: '0766'
 
 - name: Create symlink for sites-available
   file:
-    src: /etc/nginx/sites-enabled/Kibanatest123.com
-    dest: /etc/nginx/sites-available/Kibanatest123.com
+    src: /etc/nginx/sites-available/Kibanatest123.com
+    dest: /etc/nginx/sites-enabled/Kibanatest123.com
     state: link
 
+# Creating admin user for Kibana
 # Install Pexpect to handle promts of the terminal
 - name: Installing Python Pexpect
   apt:
@@ -43,7 +44,7 @@
      responses:
        'Password:' : "{{kibana_password}}"
 
-- name: Starting Nginx service
+- name: Restarting Nginx
   service:
     name: nginx
     state: restarted

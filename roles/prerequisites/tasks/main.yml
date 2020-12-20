@@ -1,6 +1,6 @@
 ---
 
-- name: Fixing broken package on ubuntu
+- name: Fixing broken package on Ubuntu
   shell: apt-get update --fix-missing
 
 - name: Install/Upgrade Java 11
@@ -8,7 +8,7 @@
     name: openjdk-11-jdk
     state: present
 
-- name: Add Logstash apt key
+- name: Add Elastic apt key
   apt_key:
    url: "https://packages.elastic.co/GPG-KEY-elasticsearch"
    state: present
@@ -18,7 +18,7 @@
     name: apt-transport-https
     state: present
 
-- name: Adding Logstash repo
+- name: Adding Elastic repo
   apt_repository:
    repo: deb https://artifacts.elastic.co/packages/7.x/apt stable main
    state: present

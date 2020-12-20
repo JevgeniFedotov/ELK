@@ -35,7 +35,7 @@
    regexp: 'cluster.initial_master_nodes:'
    line: 'cluster.initial_master_nodes: ["{{ Elastic01 }}"]'
 
-- name: Starting Elasticsearch
+- name: Restarting Elasticsearch
   service:
    name: elasticsearch
    state: restarted

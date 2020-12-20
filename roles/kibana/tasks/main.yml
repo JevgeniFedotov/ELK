@@ -4,7 +4,6 @@
   apt:
    name: kibana
    state: present
-   update_cache: yes
 
 - name: Defining server.host
   lineinfile:
@@ -24,7 +23,7 @@
    regexp: 'elasticsearch.hosts:'
    line: 'elasticsearch.hosts: "http://{{ Elastic01 }}:9200"'
 
-- name: Starting Kibana
+- name: Restarting Kibana
   service:
    name: kibana
    state: restarted
